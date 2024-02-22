@@ -1,0 +1,87 @@
+_schema-version: '3.1'
+ID: sap-sample-fiori-elements-uploadset
+version: 1.0.0
+description: "Extend Upload Set to Fiori Elements and utilize Document Management Service"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production
+modules:
+  - name: sap-sample-fiori-elements-uploadset-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: sap-sample-fiori-elements-uploadset-db
+      - name: sap-sample-fiori-elements-uploadset-auth
+  - name: sap-sample-fiori-elements-uploadset-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: sap-sample-fiori-elements-uploadset-db
+  - name: sap-sample-fiori-elements-uploadset-destination-content
+    type: com.sap.application.content
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: sap-sample-fiori-elements-uploadset-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: sap-sample-fiori-elements-uploadset-auth
+              ServiceKeyName: sap-sample-fiori-elements-uploadset-auth-key
+            - Name: sap-sample-fiori-elements-uploadset-srv
+              URL: ~{srv-api/srv-url}
+              Authentication: OAuth2UserTokenExchange
+              TokenServiceInstanceName: sap-sample-fiori-elements-uploadset-auth
+              TokenServiceKeyName: sap-sample-fiori-elements-uploadset-auth-key
+    build-parameters:
+      no-source: true
+    requires:
+      - name: srv-api
+      - name: sap-sample-fiori-elements-uploadset-auth
+        parameters:
+          service-key:
+            name: sap-sample-fiori-elements-uploadset-auth-key
+      - name: sap-sample-fiori-elements-uploadset-destination
+        parameters:
+          content-target: true
+resources:
+  - name: sap-sample-fiori-elements-uploadset-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: sap-sample-fiori-elements-uploadset-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      service-keys:
+        - name: sap-sample-fiori-elements-uploadset-auth-key
+      path: ./xs-security.json
+      config:
+        xsappname: sap-sample-fiori-elements-uploadset
+        tenant-mode: dedicated
+  - name: sap-sample-fiori-elements-uploadset-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination
+      service-keys:
+        - name: sap-sample-fiori-elements-uploadset-destination-key
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0

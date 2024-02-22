@@ -8,12 +8,20 @@
   "dependencies": {
     "@sap/cds": "^7",
     "express": "^4",
-    "sap-cap-sdm-plugin": "^1.2.7"
+    "sap-cap-sdm-plugin": "^1.2.7",
+    "@sap/xssec": "^3"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
   },
   "scripts": {
+    "start": "cds-serve",
     "watch": "cds watch --profile hybrid"
+  },
+  "cds": {
+    "requires": {
+      "auth": "xsuaa"
+    }
   }
 }
