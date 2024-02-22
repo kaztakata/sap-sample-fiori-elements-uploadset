@@ -1,0 +1,19 @@
+{
+  "name": "sap-sample-fiori-elements-uploadset",
+  "version": "1.0.0",
+  "description": "Extend Upload Set to Fiori Elements and utilize Document Management Service",
+  "repository": "https://github.com/kaztakata/sap-sample-fiori-elements-uploadset.git",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4",
+    "sap-cap-sdm-plugin": "^1.2.7"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1"
+  },
+  "scripts": {
+    "watch": "cds watch --profile hybrid"
+  }
+}
