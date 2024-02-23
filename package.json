@@ -20,7 +20,7 @@
     "scripts": {
         "start": "cds-serve",
         "watch": "cds watch --profile hybrid",
-        "watch-template-requests": "cds watch --open kaztakata.templaterequests/index.html?sap-ui-xx-viewCache=false --livereload false --profile hybrid",
+        "watch-template-requests": "cds watch --open kaztakata.templaterequests/index.html?sap-ui-xx-viewCache=false --livereload false",
         "undeploy": "cf undeploy sap-sample-fiori-elements-uploadset --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
