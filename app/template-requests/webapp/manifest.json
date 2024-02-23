@@ -183,5 +183,9 @@
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
-  }
+  },
+  "sap.cloud":{
+		"public": true,
+		"service": "kaztakata.templaterequests"
+	}
 }

@@ -32,6 +32,10 @@ modules:
         parameters:
           service-key:
             name: sap-sample-fiori-elements-uploadset-auth-key
+      - name: sap-sample-fiori-elements-uploadset-repo-host
+        parameters:
+          service-key:
+            name: sap-sample-fiori-elements-uploadset-repo-host-key
       - name: sap-sample-fiori-elements-uploadset-destination
         parameters:
           content-target: true
@@ -39,15 +43,21 @@ modules:
       content:
         instance:
           destinations:
+            - Name: sap-sample-fiori-elements-uploadset-repo-host
+              ServiceInstanceName: sap-sample-fiori-elements-uploadset-html5-srv
+              ServiceKeyName: sap-sample-fiori-elements-uploadset-repo-host-key
+              sap.cloud.service: kaztakata.templaterequests
             - Authentication: OAuth2UserTokenExchange
               Name: sap-sample-fiori-elements-uploadset-auth
               ServiceInstanceName: sap-sample-fiori-elements-uploadset-auth
               ServiceKeyName: sap-sample-fiori-elements-uploadset-auth-key
+              sap.cloud.service: kaztakata.templaterequests
             - Authentication: OAuth2UserTokenExchange
               Name: sap-sample-fiori-elements-uploadset-srv
               TokenServiceInstanceName: sap-sample-fiori-elements-uploadset-auth
               TokenServiceKeyName: sap-sample-fiori-elements-uploadset-auth-key
               URL: ~{srv-api/srv-url}
+              sap.cloud.service: kaztakata.templaterequests
           existing_destinations_policy: update
     build-parameters:
       no-source: true
