@@ -150,7 +150,22 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/TemplateRequests"
+              "contextPath": "/TemplateRequests",
+              "content": {
+                "body": {
+                  "sections": {
+                    "Attachments": {
+                      "template": "kaztakata.templaterequests.ext.fragment.Attachments",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "Comment"
+                      },
+                      "title": "{i18n>attachments}",
+                      "type": "XMLFragment"
+                    }
+                  }
+                }
+              }
             }
           },
           "controlAggregation": "midColumnPages",
