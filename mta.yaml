@@ -81,6 +81,8 @@ resources:
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
+      service-keys:
+        - name: sap-sample-fiori-elements-uploadset-db-key
       service-plan: hdi-shared
   - name: sap-sample-fiori-elements-uploadset-auth
     type: org.cloudfoundry.managed-service

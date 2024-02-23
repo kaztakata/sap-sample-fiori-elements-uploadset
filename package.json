@@ -1,39 +1,41 @@
 {
-    "name": "sap-sample-fiori-elements-uploadset",
-    "version": "1.0.0",
-    "description": "Extend Upload Set to Fiori Elements and utilize Document Management Service",
-    "repository": "https://github.com/kaztakata/sap-sample-fiori-elements-uploadset.git",
-    "license": "MIT",
-    "private": true,
-    "dependencies": {
-        "@sap/cds": "^7",
-        "express": "^4",
-        "sap-cap-sdm-plugin": "^1.2.7",
-        "@sap/xssec": "^3"
-    },
-    "devDependencies": {
-        "@cap-js/sqlite": "^1",
-        "@sap/cds-dk": "^7",
-        "cds-plugin-ui5": "^0.6.13",
-        "rimraf": "^3.0.2"
-    },
-    "scripts": {
-        "start": "cds-serve",
-        "watch": "cds watch --profile hybrid",
-        "watch-template-requests": "cds watch --open kaztakata.templaterequests/index.html?sap-ui-xx-viewCache=false --livereload false",
-        "undeploy": "cf undeploy sap-sample-fiori-elements-uploadset --delete-services --delete-service-keys --delete-service-brokers",
-        "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
-    },
-    "cds": {
-        "requires": {
-            "auth": "xsuaa"
-        }
-    },
-    "workspaces": [
-        "app/*"
-    ],
-    "sapux": [
-        "app/template-requests"
-    ]
+  "name": "sap-sample-fiori-elements-uploadset",
+  "version": "1.0.0",
+  "description": "Extend Upload Set to Fiori Elements and utilize Document Management Service",
+  "repository": "https://github.com/kaztakata/sap-sample-fiori-elements-uploadset.git",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4",
+    "sap-cap-sdm-plugin": "^1.2.7",
+    "@sap/xssec": "^3",
+    "@sap/cds-hana": "^2"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "cds-plugin-ui5": "^0.6.13",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch --profile hybrid",
+    "watch-template-requests": "cds watch --open kaztakata.templaterequests/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy sap-sample-fiori-elements-uploadset --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "auth": "xsuaa",
+      "db": "hana"
+    }
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/template-requests"
+  ]
 }
