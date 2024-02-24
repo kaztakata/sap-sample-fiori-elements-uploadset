@@ -9,6 +9,7 @@ modules:
     requires:
       - name: sap-sample-fiori-elements-uploadset-db
       - name: sap-sample-fiori-elements-uploadset-auth
+      - name: sap-sample-fiori-elements-uploadset-destination
     provides:
       - name: srv-api
         properties:
