@@ -27,3 +27,11 @@ export function onUploadCompleted(this: ExtensionAPI, event: UI5Event) {
     const model: ODataModel = this.getModel()
     model.refresh()
 }
+
+export function onOpenPressed(this: ExtensionAPI, event: UI5Event) {
+    const model: ODataModel = this.getModel()
+    const serviceUrl = model.getServiceUrl()    
+    const item: UploadSetItem = event.getParameters()?.item
+    const url = item.getUrl()
+    item.setUrl(url.replace('odata/v4/user/', serviceUrl))
+}
