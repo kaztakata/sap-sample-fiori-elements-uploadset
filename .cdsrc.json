@@ -1,0 +1,10 @@
+{
+  "requires": {
+    "sap-cap-sdm-plugin": {
+      "settings": {
+        "destination": "SDM",
+        "repositoryId": "c93eea9f-7d36-4613-84a5-f1302f1f944c"
+      }
+    }
+  }
+}
