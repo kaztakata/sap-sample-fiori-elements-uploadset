@@ -10,16 +10,15 @@ export async function onAfterItemAdded(this: ExtensionAPI, event: UI5Event) {
     const model: ODataModel = this.getModel()
     const item: UploadSetItem = event.getParameters()?.item
     const uploadSet: UploadSet = this.byId('UploadSet')
-    const serviceUrl = model.getServiceUrl()
+    const serviceUrl = model.getServiceUrl().replace(/\/$/, '') // remove last slash if exist
 
-    const path = this.getIntentBasedNavigation().getView().getBindingContext()?.getPath() 
+    const path = this.getRouting().getView().getBindingContext()?.getPath() 
     const binding = model.bindList(`${path}/attachments`)
     const attachment = binding.create({name: item.getFileName()})
     await attachment.created()
     
     item.setUploadUrl(`${serviceUrl}${path}/attachments('${attachment.getObject().ID}')/content`)
     item.addHeaderField(new Item({key: "X-CSRF-Token", text: model.getHttpHeaders()['X-CSRF-Token']}))    
-    uploadSet.setHttpRequestMethod('PUT' as UploaderHttpRequestMethod)
     uploadSet.uploadItem(item);
 }
 
