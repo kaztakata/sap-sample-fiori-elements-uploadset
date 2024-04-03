@@ -13,6 +13,7 @@ entity TemplateRequests : cuid, managed {
                           on attachments.templateRequest = $self;
 };
 
+@cds.persistence.skip
 @Sdm.Entity
 entity Attachments {
   key ID              : String          @Sdm.Field     : {

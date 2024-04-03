@@ -8,7 +8,7 @@
   "dependencies": {
     "@sap/cds": "^7",
     "express": "^4",
-    "sap-cap-sdm-plugin": "^1.2.7",
+    "sap-cap-sdm-plugin": "^1.3.1",
     "@sap/xssec": "^3",
     "@sap/cds-hana": "^2"
   },
